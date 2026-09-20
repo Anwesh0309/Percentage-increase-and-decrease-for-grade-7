@@ -47,12 +47,12 @@ export const StoryStage = () => {
         </span>
       </div>
 
-      {/* 2. Centered Main Story Card (Image Left, Text Right) - Expanded Frame & Grade 3 Legibility */}
-      <div className="main-card main-card--wide max-w-6xl p-5 sm:p-6 md:p-8 my-auto !flex-row flex items-center gap-6 md:gap-8 shadow-[0_24px_70px_rgba(0,0,0,0.75)] bg-[#150e33]/95 border-2 border-purple-500/40 rounded-3xl max-h-[calc(100vh-110px)] shrink min-h-0 overflow-hidden">
+      {/* 2. Centered Main Story Card (Image Left, Text Right) - Responsive Frame */}
+      <div className="main-card main-card--wide max-w-6xl p-4 sm:p-5 md:p-6 lg:p-7 my-auto !flex-col sm:!flex-row flex items-center gap-4 sm:gap-6 md:gap-8 shadow-[0_24px_70px_rgba(0,0,0,0.75)] bg-[#150e33]/95 border-2 border-purple-500/40 rounded-3xl max-h-[calc(100vh-100px)] shrink min-h-0 overflow-hidden">
         
-        {/* Left Column: Story Illustration Image - Expanded Dimensions */}
-        <div className="w-1/2 flex items-center justify-center shrink-0">
-          <div className="relative w-full h-52 sm:h-72 md:h-80 lg:h-[350px] xl:h-[380px] max-h-[46vh] rounded-2xl overflow-hidden border-2 border-amber-400/50 bg-[#0a041c] shadow-2xl">
+        {/* Left Column: Story Illustration Image - Responsive Scaling */}
+        <div className="w-full sm:w-1/2 flex items-center justify-center shrink-0">
+          <div className="relative w-full h-44 sm:h-64 md:h-72 lg:h-[320px] max-h-[40vh] rounded-2xl overflow-hidden border-2 border-amber-400/50 bg-[#0a041c] shadow-2xl">
             <img
               src={currentSlide.image}
               alt={currentSlide.title}
@@ -62,37 +62,37 @@ export const StoryStage = () => {
         </div>
 
         {/* Right Column: Slide Title, Narrative, Highlight Pill & Mascot Action Pill */}
-        <div className="w-1/2 flex flex-col space-y-3 md:space-y-4 text-left justify-center flex-1 min-h-0 overflow-hidden">
+        <div className="w-full sm:w-1/2 flex flex-col space-y-2 sm:space-y-3 md:space-y-3.5 text-left justify-center flex-1 min-h-0 overflow-y-auto custom-scrollbar pr-1">
           {/* Slide Title */}
-          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-black text-amber-400 leading-tight drop-shadow-md">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-display font-black text-amber-400 leading-tight drop-shadow-md shrink-0">
             {currentSlide.title}
           </h2>
 
           {/* Narrative Paragraph */}
-          <p className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold text-slate-100 leading-relaxed font-body whitespace-pre-line">
+          <p className="text-sm sm:text-base md:text-lg lg:text-xl font-bold text-slate-100 leading-relaxed font-body whitespace-pre-line shrink-0">
             {currentSlide.narrative}
           </p>
 
           {/* Highlight Pill Box */}
-          <div className="border-2 border-amber-400/60 bg-[#140b2f] rounded-full px-5 py-2.5 text-center text-sm sm:text-base md:text-lg lg:text-xl font-display font-black text-amber-300 shadow-[0_0_20px_rgba(250,204,21,0.35)] flex items-center justify-center gap-2">
+          <div className="border-2 border-amber-400/60 bg-[#140b2f] rounded-full px-4 py-2 text-center text-xs sm:text-sm md:text-base lg:text-lg font-display font-black text-amber-300 shadow-[0_0_20px_rgba(250,204,21,0.35)] flex items-center justify-center gap-2 shrink-0">
             ✨ {currentSlide.keyPoint} ✨
           </div>
 
           {/* Mascot Circle + White Action Pill Button */}
-          <div className="flex items-center gap-3.5 pt-1">
+          <div className="flex items-center gap-3 pt-0.5 shrink-0">
             <button
               onClick={handleMascotSpeak}
-              className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-amber-400/20 border-2 border-amber-400 flex items-center justify-center text-3xl shrink-0 shadow-[0_0_16px_rgba(250,204,21,0.5)] cursor-pointer hover:scale-105 transition-transform"
+              className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-amber-400/20 border-2 border-amber-400 flex items-center justify-center text-2xl sm:text-3xl shrink-0 shadow-[0_0_16px_rgba(250,204,21,0.5)] cursor-pointer hover:scale-105 transition-transform"
               title="Listen narration"
             >
               🦁
             </button>
             <button
               onClick={handleMascotSpeak}
-              className="bg-white hover:bg-slate-100 text-slate-950 font-display font-black text-sm sm:text-base md:text-lg px-6 py-3 rounded-full shadow-xl text-center flex-1 flex items-center justify-between gap-2 cursor-pointer transition-colors"
+              className="bg-white hover:bg-slate-100 text-slate-950 font-display font-black text-xs sm:text-sm md:text-base px-4 py-2 sm:py-2.5 rounded-full shadow-xl text-center flex-1 flex items-center justify-between gap-2 cursor-pointer transition-colors"
             >
               <span className="truncate">{currentSlide.mascotDialogue || "Let's help Oliver group his items!"}</span>
-              <span className="text-lg sm:text-xl shrink-0">{currentSlide.emoji || "🍎"}</span>
+              <span className="text-base sm:text-lg shrink-0">{currentSlide.emoji || "🍎"}</span>
             </button>
           </div>
         </div>
