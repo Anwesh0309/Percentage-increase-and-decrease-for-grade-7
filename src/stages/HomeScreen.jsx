@@ -16,7 +16,7 @@ export const HomeScreen = () => {
     <div className="relative w-full h-full max-h-screen flex flex-col items-center justify-between p-2 sm:p-4 overflow-hidden select-none">
       {/* Top Right Exit Button matching screenshot */}
       <button
-        onClick={() => setStage('story')}
+        onClick={() => setStage('wonder')}
         className="w-10 h-10 rounded-xl bg-blue-500 hover:bg-blue-600 text-white font-bold text-lg flex items-center justify-center shadow-md transition-colors cursor-pointer absolute top-3.5 right-3.5 z-50"
         title="Exit / Continue"
       >
@@ -157,7 +157,7 @@ export const HomeScreen = () => {
 
         {/* 6. Glowing Primary CTA Button */}
         <button
-          onClick={() => setStage('story')}
+          onClick={() => setStage('wonder')}
           className="btn-gold max-w-lg w-full flex items-center justify-center gap-2.5 text-xl sm:text-2xl md:text-3xl py-3.5 rounded-full cursor-pointer shadow-[0_0_30px_rgba(250,204,21,0.7)] my-1.5"
         >
           <span>🚀 Begin Your Journey!</span>
