@@ -18,6 +18,9 @@ export const SimulateStage = () => {
 
   useEffect(() => {
     soundEngine.playText(stationNarrationKey[simulateStation]);
+    return () => {
+      soundEngine.stop();
+    };
   }, [simulateStation]);
 
   const stations = [

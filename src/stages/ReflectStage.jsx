@@ -1,11 +1,18 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import useAppStore from '../store/useAppStore';
 import soundEngine from '../utils/audio';
 
 export const ReflectStage = () => {
-  const { progress, setStage, resetWorldsProgress } = useAppStore();
+  const { progress } = useAppStore();
   const [reflectionText, setReflectionText] = useState('');
   const [isCompleted, setIsCompleted] = useState(false);
+
+  useEffect(() => {
+    soundEngine.playText('reflect_intro');
+    return () => {
+      soundEngine.stop();
+    };
+  }, []);
 
   const handleComplete = () => {
     soundEngine.playText('world_complete');

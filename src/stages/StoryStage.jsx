@@ -10,6 +10,9 @@ export const StoryStage = () => {
 
   useEffect(() => {
     soundEngine.playText(`story_slide_${storySlideIndex + 1}`);
+    return () => {
+      soundEngine.stop();
+    };
   }, [storySlideIndex]);
 
   const handleNext = () => {

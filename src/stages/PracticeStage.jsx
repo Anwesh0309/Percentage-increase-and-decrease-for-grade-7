@@ -3,7 +3,7 @@ import useAppStore from '../store/useAppStore';
 import PercentDiagramSVG from '../components/PercentDiagramSVG';
 import { worldsData } from '../data/worlds';
 import soundEngine from '../utils/audio';
-import { Heart, Flame, Star, RotateCcw, CheckCircle, XCircle, LogOut, ArrowLeft } from 'lucide-react';
+import { Heart, Flame, Star, RotateCcw, LogOut, ArrowLeft, Lightbulb } from 'lucide-react';
 
 export const PracticeStage = () => {
   const {
@@ -13,7 +13,7 @@ export const PracticeStage = () => {
     session,
     answerQuestion,
     advanceQuestion,
-    useHint,
+    useHint: triggerHint,
     progress,
   } = useAppStore();
 
@@ -24,6 +24,9 @@ export const PracticeStage = () => {
     if (!activeWorldId) {
       soundEngine.playText('practice_welcome');
     }
+    return () => {
+      soundEngine.stop();
+    };
   }, [activeWorldId]);
 
   const currentQ = session.questions ? session.questions[session.currentIndex] : null;
@@ -34,7 +37,16 @@ export const PracticeStage = () => {
     if (activeWorldId && currentQ && !session.outOfHearts && !session.completed) {
       soundEngine.playText(`w${activeWorldId}_q${session.currentIndex + 1}_prompt`);
     }
+    return () => {
+      soundEngine.stop();
+    };
   }, [activeWorldId, session.currentIndex]);
+
+  const handleHintClick = () => {
+    if (!currentQ || session.completed || session.outOfHearts) return;
+    triggerHint();
+    soundEngine.playText(`w${activeWorldId}_q${session.currentIndex + 1}_hint`);
+  };
 
   const handleStartWorld = (worldId) => {
     setSelectedOption(null);
@@ -326,6 +338,25 @@ export const PracticeStage = () => {
             <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-display font-black text-white leading-relaxed max-w-2xl">
               {currentQ.prompt}
             </h2>
+
+            {/* Hint Button & Hint Box */}
+            <div className="mt-2.5 w-full flex flex-col items-center justify-center shrink-0">
+              {!session.hintUsed ? (
+                <button
+                  onClick={handleHintClick}
+                  className="bg-amber-400/20 hover:bg-amber-400/30 border border-amber-400/50 text-amber-300 px-4 py-1.5 rounded-full text-xs sm:text-sm font-display font-black flex items-center gap-1.5 transition-all cursor-pointer shadow-md hover:scale-105"
+                  title="Listen & view hint"
+                >
+                  <Lightbulb className="w-4 h-4 text-amber-300 animate-pulse" />
+                  <span>💡 Get Hint</span>
+                </button>
+              ) : (
+                <div className="bg-[#1c123d] border-2 border-amber-400/70 rounded-xl p-2.5 sm:p-3 text-amber-200 text-xs sm:text-sm md:text-base font-bold font-body text-center shadow-[0_0_15px_rgba(251,191,36,0.3)] flex items-center justify-center gap-2 max-w-xl">
+                  <span className="text-amber-400 text-base sm:text-lg shrink-0">💡</span>
+                  <span>{currentQ.hint}</span>
+                </div>
+              )}
+            </div>
           </div>
 
           {/* 2x2 Option Buttons Grid */}

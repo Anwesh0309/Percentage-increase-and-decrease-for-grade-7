@@ -8,6 +8,9 @@ export const HomeScreen = () => {
 
   useEffect(() => {
     soundEngine.playText('home_intro');
+    return () => {
+      soundEngine.stop();
+    };
   }, []);
 
   const handleMascotSpeak = () => {

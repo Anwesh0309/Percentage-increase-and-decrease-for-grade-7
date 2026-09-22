@@ -9,6 +9,9 @@ export const WonderStage = () => {
   useEffect(() => {
     soundEngine.playText('wonder_prompt');
     soundEngine.enqueue('wonder_teaser');
+    return () => {
+      soundEngine.stop();
+    };
   }, []);
 
   return (
