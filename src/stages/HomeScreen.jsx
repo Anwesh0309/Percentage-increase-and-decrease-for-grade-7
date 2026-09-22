@@ -7,15 +7,10 @@ export const HomeScreen = () => {
   const { setStage } = useAppStore();
 
   useEffect(() => {
-    soundEngine.playText('home_intro');
-    return () => {
-      soundEngine.stop();
-    };
+    soundEngine.stop();
   }, []);
 
-  const handleMascotSpeak = () => {
-    soundEngine.playText('home_intro');
-  };
+  const handleMascotSpeak = () => {};
 
   return (
     <div className="relative w-full h-full max-h-screen flex flex-col items-center justify-between p-2 sm:p-4 overflow-hidden select-none">
